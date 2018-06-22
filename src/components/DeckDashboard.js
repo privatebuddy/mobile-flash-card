@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Text ,Content,List,ListItem,Card,CardItem} from 'native-base';
 import {retrieveAllDecks} from '../utilities/StorageManager'
 import {retrieveDecks} from "../actions/deck";
-import FlashCardDetailView from "./FlashDeckDetailView";
-
 class DeckDashboard extends Component {
 
     componentDidMount()
@@ -16,6 +14,7 @@ class DeckDashboard extends Component {
     {
 
     }
+
 
     updateDashBoard = () => {
         retrieveAllDecks().then(results => this.props.dispatch(retrieveDecks(results)));
