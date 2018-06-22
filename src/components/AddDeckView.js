@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
 import { Content,Container, Header, Left, Body, Right, Button, Icon, Title,Form,Item,Input,Text } from 'native-base';
+import {addNewDeck} from '../utilities/StorageManager'
+export default class AddDeckView extends Component {
 
-export default class AddCardView extends Component {
+    state={
+        deckName:'New Name'
+    };
 
     onBackPressed = () =>{
+        this.props.navigation.state.params.DeckDashboard.updateDashBoard();
         this.props.navigation.goBack()
     };
+
+    onCreatePress = () =>{
+        addNewDeck(this.state.deckName).then(() => {
+            this.props.navigation.state.params.DeckDashboard.updateDashBoard();
+            this.props.navigation.goBack()
+        });
+
+
+    };
+
+
 
     render() {
         return (
@@ -25,10 +41,10 @@ export default class AddCardView extends Component {
                 <Content padder>
                     <Form>
                         <Item last>
-                            <Input placeholder="Deck name" />
+                            <Input placeholder="Deck name" onChangeText={(text) => this.setState({deckName:text})} />
                         </Item>
                     </Form>
-                    <Button block style={{marginTop: 20}}>
+                    <Button block style={{marginTop: 20}} onPress={this.onCreatePress}>
                         <Text>Add</Text>
                     </Button>
                 </Content>
